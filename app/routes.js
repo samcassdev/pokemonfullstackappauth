@@ -18,6 +18,16 @@ module.exports = function(app, passport, db) {
           })
       });
 
+      app.get('/poke', isLoggedIn, function(req, res) {
+          db.collection('poke').find().toArray((err, result) => {
+            if (err) return console.log(err)
+            res.render('profile.ejs', {
+              // user : req.user,
+              poke: req.body.result
+            })
+          })
+      });
+
       // LOGOUT ==============================
       app.get('/logout', function(req, res) {
           req.logout();
@@ -25,9 +35,9 @@ module.exports = function(app, passport, db) {
       });
 
   // message board routes ===============================================================
-
+// let pokemonName = document.getElementById('name')
       app.post('/poke', (req, res) => {
-        db.collection('poke').save({name: req.body.name, ability: req.body.ability, version: req.body.version}, (err, result) => {
+        db.collection('poke').save({name: req.body.name}, (err, result) => {
           if (err) return console.log(err)
           console.log('saved to database')
           res.redirect('/profile')
@@ -61,7 +71,8 @@ module.exports = function(app, passport, db) {
       })
 
       app.delete('/poke', (req, res) => {
-        db.collection('poke').findOneAndDelete({name: req.body.name, ability: req.body.ability, version: req.body.version}, (err, result) => {
+        // console.log("zoidberg", req, res);
+        db.collection('poke').findOneAndDelete({name: req.body.poke}, (err, result) => {
           if (err) return res.send(500, err)
           res.send('Message deleted!')
         })
