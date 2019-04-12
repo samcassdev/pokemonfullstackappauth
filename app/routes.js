@@ -37,7 +37,7 @@ module.exports = function(app, passport, db) {
   // message board routes ===============================================================
 // let pokemonName = document.getElementById('name')
       app.post('/poke', (req, res) => {
-        db.collection('poke').save({name: req.body.name}, (err, result) => {
+        db.collection('poke').save({name: req.body.name, img: req.body.image}, (err, result) => {
           if (err) return console.log(err)
           console.log('saved to database')
           res.redirect('/profile')

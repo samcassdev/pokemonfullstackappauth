@@ -16,10 +16,11 @@
       <input id="pokemon" type="text" name="" value="">
       <button id="apiCall" type="button" name="button">Gotta catch em all!</button>
       <p id="ability"></p>
-      <img id="sprite" src="" alt="">
+      <img id="sprite" src="" alt="" name="image">
       <p id="version"></p>
       <form class="" action="/poke" method="post">
         <input id="submitPokemon" type="text" name="name" value="">
+        <input id="pokemonImage" hidden type="text" name="image" value="">
         <button id="save" type="submit" name="button">Save this Pokemon</button>
       </form>
     </section>
@@ -32,6 +33,7 @@
       <% for(var i=0; i<poke.length; i++) {%>
         <li class="message">
           <span id="savedPokes"><%= poke[i].name %></span>
+          <img id="sprite" src="<%= poke[i].img %>" alt="poke image">
           <span><i class="fas fa-trash-alt"></i></span>
         </li>
       <% } %>

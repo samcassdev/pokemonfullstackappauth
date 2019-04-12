@@ -13,7 +13,8 @@ function pickOne() {
     .then(response => {
       console.log(response);
 
-      document.querySelector("#submitPokemon").innerHTML = response.species.name;
+      document.querySelector("#submitPokemon").value = response.species.name;
+      document.querySelector("#pokemonImage").value = response.sprites.front_default;
       document.querySelector("#ability").innerHTML = response.abilities[0].ability.name;
       document.querySelector("#sprite").src = response.sprites.front_default;
       document.querySelector("#version").innerHTML = response.game_indices[4].version.name;
